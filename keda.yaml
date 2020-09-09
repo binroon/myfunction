@@ -1,0 +1,29 @@
+apiVersion: keda.k8s.io/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: azure-blob-auth
+spec:
+  podIdentity:
+    provider: azure
+---
+apiVersion: keda.k8s.io/v1alpha1
+kind: ScaledObject
+metadata:
+  name: azure-blob-scaledobject
+  namespace: default
+spec:
+  scaleTargetRef:
+    deploymentName: myfunction
+  triggers:
+  - type: azure-blob
+    metadata:
+      connection: AzureWebJobsStorage
+      accountName: "logp1"
+      # Required
+      blobContainerName: keda
+      # Optional
+      blobCount: "5" # default 5
+      blobPrefix: "" # Default : ""
+      blobDelimiter: "/" # Default: "/"
+    #authenticationRef:
+        #name: azure-blob-auth # authenticationRef would need either podIdentity or define a connection parameter

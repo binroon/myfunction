@@ -8,7 +8,7 @@ namespace MyFunctionProj
 {
     public static class blobTrigger
     {
-        [FunctionName("blobTrigger")]
+        //[FunctionName("blobTrigger")]
         public static void Run([BlobTrigger("keda/{name}")]Stream myBlob, string name, ILogger log)
         {
             log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");

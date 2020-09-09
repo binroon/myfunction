@@ -1,0 +1,23 @@
+{
+    "topic": "/subscriptions/8c0bdfef-d175-4f45-8eca-0a26f347c4a3/resourceGroups/logp1/providers/Microsoft.Storage/storageAccounts/logp1",
+    "subject": "/blobServices/default/containers/keda/blobs/3.log",
+    "eventType": "Microsoft.Storage.BlobCreated",
+    "id": "6ea3e80b-501e-009a-44c8-84e9ba06cf3a",
+    "data": {
+        "api": "PutBlockList",
+        "clientRequestId": "933fc4d6-6041-4cb0-7fd8-22e82d626eeb",
+        "requestId": "6ea3e80b-501e-009a-44c8-84e9ba000000",
+        "eTag": "0x8D852DFA6C64E55",
+        "contentType": "text/plain; charset=utf-8",
+        "contentLength": 3281,
+        "blobType": "BlockBlob",
+        "url": "https://logp1.blob.core.windows.net/keda/3.log",
+        "sequencer": "0000000000000000000000000000061400000000007d75fd",
+        "storageDiagnostics": {
+            "batchId": "8ce8bcb8-b006-003b-00c8-8432c7000000"
+        }
+    },
+    "dataVersion": "",
+    "metadataVersion": "1",
+    "eventTime": "2020-09-07T03:39:40.2133884Z"
+}
