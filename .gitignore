@@ -4,6 +4,9 @@
 # Azure Functions localsettings file
 local.settings.json
 samplequeuemsg.json
+keda.yaml
+deploy.yaml
+deploy-queue.yaml
 
 # User-specific files
 *.suo
