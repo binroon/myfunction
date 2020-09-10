@@ -18,7 +18,7 @@ namespace MyFunctionProj
     {
         [StorageAccount("AzureWebJobsStorage")]
         [FunctionName("queueTrigger")]
-        public static void Run([QueueTrigger("queue1")] string myQueueItem, ILogger log)
+        public static void Run([QueueTrigger("airflowlogqueue")] string myQueueItem, ILogger log)
         {
             log.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
 
