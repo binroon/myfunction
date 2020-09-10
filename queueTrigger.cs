@@ -14,7 +14,7 @@ using System.Text;
 
 namespace MyFunctionProj
 {
-    public static class queueTrigger
+    public static class QueueTrigger
     {
         [StorageAccount("AzureWebJobsStorage")]
         [FunctionName("queueTrigger")]
