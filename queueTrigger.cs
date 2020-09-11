@@ -25,7 +25,7 @@ namespace MyFunctionProj
             // get blob url
             JObject o = JObject.Parse(myQueueItem);
             string blobUrl = (string)o["data"]["url"];
-            string runID = blobUrl.Split("/")[4];
+            string runID = blobUrl.Split("/")[5];
             log.LogInformation($"C# Queue trigger function processed: blobUrl - {blobUrl}");
 
             string connection = GetEnvironmentVariable("AzureWebJobsStorage");
@@ -77,7 +77,7 @@ namespace MyFunctionProj
                     if (logLineEntity != null)
                     {
                         string json = JsonConvert.SerializeObject(logLineEntity);
-                        log.LogInformation($"Executing send last record: {json}");
+                        //log.LogInformation($"Executing send last record: {json}");
                         ApiHelper.SendLogs(json: json, customerId: customerId, sharedKey: sharedKey, logName: logName, log: log);
                         
                     }
@@ -94,7 +94,7 @@ namespace MyFunctionProj
                     if (logLineEntity != null)
                     {
                         string json = JsonConvert.SerializeObject(logLineEntity);
-                        log.LogInformation($"Executing send record: {json}");
+                        //log.LogInformation($"Executing send record: {json}");
                         ApiHelper.SendLogs(json: json, customerId: customerId, sharedKey: sharedKey, logName: logName, log: log);
                     }
 
