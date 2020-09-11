@@ -16,7 +16,7 @@ namespace MyFunctionProj
 {
     public static class QueueTrigger
     {
-        [StorageAccount("AzureWebJobsStorage")]
+        //[StorageAccount("AzureWebJobsStorage")]
         [FunctionName("queueTrigger")]
         public static void Run([QueueTrigger("airflowlogqueue")] string myQueueItem, ILogger log)
         {
@@ -25,6 +25,7 @@ namespace MyFunctionProj
             // get blob url
             JObject o = JObject.Parse(myQueueItem);
             string blobUrl = (string)o["data"]["url"];
+            string runID = blobUrl.Split("/")[4];
             log.LogInformation($"C# Queue trigger function processed: blobUrl - {blobUrl}");
 
             string connection = GetEnvironmentVariable("AzureWebJobsStorage");
@@ -65,7 +66,6 @@ namespace MyFunctionProj
                 lineNumber++;
                 // started dealing a new line
                 // [2020-08-24 03:22:52,180] {taskinstance.py:881} INFO - Starting attempt 1 of 2
-
                 Regex timestamp = new Regex(@"(?<=\[)\d+\-\d+\-\d+\s\d+:\d+:\d+,\d+(?=\])"); // timestamp, start of the line
                 Regex task = new Regex(@"(?<=\s\{).+(?=\}\s)");
                 Regex logLevel = new Regex(@"(?<=\}\s)\w+(?=\s\-)");
@@ -81,7 +81,6 @@ namespace MyFunctionProj
                         ApiHelper.SendLogs(json: json, customerId: customerId, sharedKey: sharedKey, logName: logName, log: log);
                         
                     }
-
                     log.LogInformation($"Congrats!!! Job finished with {lineNumber} lines!");
                     // quit the entire loop
                     break;
@@ -104,7 +103,7 @@ namespace MyFunctionProj
 
                     // then start to deal the next record
                     logLineEntity.LogFileName = blobUrl;
-                    logLineEntity.RunId = blobUrl;
+                    logLineEntity.RunID = runID;
                     logLineEntity.LogTimestamp = m.Value;
                     logLineEntity.Task = task.Match(line).Value;
                     logLineEntity.LogLevel = logLevel.Match(line).Value;
@@ -133,8 +132,7 @@ namespace MyFunctionProj
         public string LogLevel { get; set; }
         public string Content { get; set; }
         public string LogFileName { get; set; }
-        public string RunId { get; set; }
+        public string RunID { get; set; }
         public int LineNumber { get; set; }
-
     }
 }
