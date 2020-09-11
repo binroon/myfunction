@@ -25,7 +25,7 @@ namespace MyFunctionProj
             // get blob url
             JObject o = JObject.Parse(myQueueItem);
             string blobUrl = (string)o["data"]["url"];
-            string runID = blobUrl.Split("/")[5];
+            string runID = blobUrl.Split("/")[5]; // the 2nd part after containerName
             log.LogInformation($"C# Queue trigger function processed: blobUrl - {blobUrl}");
 
             string connection = GetEnvironmentVariable("AzureWebJobsStorage");
